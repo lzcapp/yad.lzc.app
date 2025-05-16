@@ -1,178 +1,142 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>To Andy ❤</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我们的故事</title>
+    <link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;500&display=swap');
-
-        :root {
-            --primary: #FF758F;
-            --bg: linear-gradient(160deg, #FFF3F4 0%, #FFE6E9 100%);
-            --text-base: 1rem;
-            --font-title: 'Dancing Script', cursive;
-            --font-body: 'Dancing Script', cursive;
-            --font-size: 1.4em;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
+        @font-face {
+            font-family: 'XiaoShiTou';
+            src: url('fonts/XiaoShiTou.woff') format('woff'),
+            url('fonts/XiaoShiTou.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap; /* 优化加载体验 */
         }
 
         body {
-            height: 100vh;
-            background: var(--bg);
-            font-family: var(--font-body), sans-serif !important;
-            font-size: var(--font-size);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .container {
-            position: relative;
-            padding: 2rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .title {
-            font-family: 'Dancing Script', cursive;
-            color: var(--primary);
-            font-size: clamp(2.5rem, 8vw, 4rem);
+            margin: 0;
+            font-family: 'XiaoShiTou', sans-serif;
+            background: linear-gradient(to bottom right, #ffdde1, #ee9ca7);
+            color: #333;
             text-align: center;
-            margin: 2rem 0;
-            opacity: 0;
+        }
+        header {
+            padding: 40px 20px 20px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-bottom: 2px solid #f8cdda;
+        }
+        header h1 {
+            font-size: 4em;
+            margin: 0;
+            color: #d94f70;
+        }
+        header h2 {
+            font-size: 3em;
+            margin: 0;
+            color: #d94f70;
         }
 
-        .photo-wall {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            margin: 1rem auto;
-            overflow: hidden;
-            box-shadow: 0 8px 32px rgba(255, 117, 143, 0.2);
-            opacity: 0;
+        section {
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        section h2 {
+            color: #c94b62;
+            font-size: 2.2em;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .gallery img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 3px solid #f8cdda;
+        }
+        footer {
+            padding: 20px;
+            font-size: 0.9em;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.2);
         }
 
-        .love-btn {
-            display: block;
-            margin: 2rem auto;
-            padding: 1rem 3rem;
-            font-size: 1.2rem;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: transform 0.3s;
-            opacity: 0;
+        header h1, header h2, section h2 {
+            font-weight: normal;
         }
-
-        .letter {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 1s ease;
-            text-align: center;
-            line-height: 1.6;
-            color: #666;
-            margin-top: 1.2rem;
-        }
-
-        /*noinspection CssUnusedSymbol*/
-        .petal {
-            position: absolute;
-            bottom: 0;
-            pointer-events: none;
-            animation: float linear forwards;
-        }
-
-        @keyframes float {
-            to {
-                transform: translateY(-100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 1rem;
-            }
-
-            .photo-wall {
-                width: 150px;
-                height: 150px;
-            }
+        p {
+            font-size: 1.4em;
         }
     </style>
 </head>
 <body>
-<div class="container heartbeat">
-    <h1 class="title">Andie</h1>
+<header>
+    <h1>我们的故事</h1>
+    <h2>这是 猪猪 和 猪猪 的爱情</h2>
+    <p>从相遇到相知，一起走过的每一步</p>
+</header>
 
-    <div class="photo-wall">
-        <!-- 替换图片链接 -->
-        <img src="./avatar.jpg" alt="Our Memory" style="width:100%;height:100%;object-fit:cover">
+<section>
+    <h2>我们已经在一起</h2>
+    <p><span id="time"></span></p>
+</section>
+
+<!--
+<section>
+    <h2>初次相遇</h2>
+    <p>在那个阳光明媚的下午，我们第一次相遇。仿佛命中注定，彼此的眼神交汇，我们的故事就此开始。</p>
+</section>
+
+<section>
+    <h2>我们的回忆</h2>
+    <div class="gallery">
+        <img src="https://placekitten.com/200/200" alt="回忆1">
+        <img src="https://placekitten.com/201/200" alt="回忆2">
+        <img src="https://placekitten.com/200/201" alt="回忆3">
+        <img src="https://placekitten.com/202/200" alt="回忆4">
     </div>
+</section>
+-->
 
-    <button class="love-btn" onclick="showLetter()">❤ 开启心动信件</button>
+<section>
+    <h2>写给彼此的一封信</h2>
+    <p>
+        亲爱的，感谢你一直陪伴在我身边，无论风雨，我们都彼此守护。
+        <br/>
+        未来的路还很长，但我知道，有你就足够。
+    </p>
+</section>
 
-    <div class="letter" id="letter">
-        <p style="margin-bottom:1rem">亲爱的安迪：</p>
-        <p class="love-text">
-            第一次见面时，你说我像个e人。<br>
-            却没想到我们有如此多的共同点。<br>
-            每每在我们之间发生那些巧事时，<br>我们都会不约而同“太巧了！”<br>
-            就好像那次在一号线上，<br>那么多人，那么多节车厢，<br>就刚刚好就能碰见你。<br>
-            我不知道怎么解释这一切，<br>只能说遇见你是我最大的幸运！<br>
-        </p>
-    </div>
-</div>
+<footer>
+    <p>© 2025 我们的爱情故事 | 永远爱你 ❤️</p>
+</footer>
 
 <script>
-    // 初始化动画
-    gsap.to(".title", {duration: 1, opacity: 1, y: 0, delay: 0.3})
-    gsap.to(".photo-wall", {duration: 1, opacity: 1, scale: 1, delay: 0.6})
-    gsap.to(".love-btn", {duration: 1, opacity: 1, delay: 0.9})
+    const startDate = new Date("2025-04-26T21:30:00");
+    const timeEl = document.getElementById("time");
 
-    // 花瓣飘落效果
-    function createPetals() {
-        for (let i = 0; i < 15; i++) {
-            const petal = document.createElement('div');
-            petal.className = 'petal';
-            petal.style = `
-                    left: ${Math.random() * 100}%;
-                    height: ${Math.random() * 100}%;
-                    font-size: ${24 + Math.random() * 16}px;
-                    animation-duration: ${8 + Math.random() * 4}s;
-                    animation-delay: ${Math.random() * 2}s;
-                    color: var(--primary);
-                `;
-            petal.innerHTML = '🌸';
-            document.body.appendChild(petal);
-        }
+    function updateCountdown() {
+        const now = new Date();
+        const diff = now - startDate;
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+        timeEl.textContent = `${days} 天 ${hours} 小时 ${minutes} 分 ${seconds} 秒`;
     }
 
-    createPetals();
-
-    // 信件展示逻辑
-    function showLetter() {
-        const letter = document.getElementById('letter');
-        letter.style.maxHeight = letter.scrollHeight + 'px';
-        gsap.to(".love-btn", {scale: 0.95, duration: 0.3, yoyo: true, repeat: 1});
-    }
-
-    // 移动端触摸反馈
-    document.querySelector('.love-btn').addEventListener('touchstart', function () {
-        this.style.transform = 'scale(0.95)';
-    });
-    document.querySelector('.love-btn').addEventListener('touchend', function () {
-        this.style.transform = 'scale(1)';
-    });
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
 </script>
 </body>
 </html>
