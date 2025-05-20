@@ -75,11 +75,40 @@
             background-color: rgba(0, 0, 0, 0.2);
         }
 
-        header h1, header h2, section h2 {
+        header h1, header h2, section h2, #popup h2 {
             font-weight: normal;
         }
         p {
             font-size: 1.4em;
+        }
+
+        /* 弹窗样式 */
+        #popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            max-width: 90%;
+        }
+        #popup h2 {
+            margin-top: 0;
+            color: #d94f70;
+            font-size: 2.3em;
+        }
+        #popup button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #d94f70;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -135,6 +164,12 @@
     <p>© 2025 我们的爱情故事 | 永远爱你 ❤️</p>
 </footer>
 
+<div id="popup">
+    <h2>520 快乐！❤️</h2>
+    <p>亲爱的，今天是个特别的日子，谢谢你陪我走到现在！</p>
+    <button onclick="document.getElementById('popup').style.display='none'">关闭</button>
+</div>
+
 <script>
     const startDate = new Date("2025-04-26T21:30:00");
     const timeEl = document.getElementById("time");
@@ -147,6 +182,18 @@
         const minutes = Math.floor((diff / (1000 * 60)) % 60);
         const seconds = Math.floor((diff / 1000) % 60);
         timeEl.textContent = `${days} 天 ${hours} 小时 ${minutes} 分 ${seconds} 秒`;
+    }
+
+    function isSpecialDate() {
+        const now = new Date();
+        const mmdd = (now.getMonth() + 1).toString().padStart(2, '0') + now.getDate().toString().padStart(2, '0');
+        return mmdd === '0520' // 520 或 七夕（农历七夕约为公历8月中下旬，这里简化为 0817）
+    }
+
+    if (isSpecialDate()) {
+        setTimeout(() => {
+            document.getElementById("popup").style.display = 'block';
+        }, 1000);
     }
 
     setInterval(updateCountdown, 1000);
