@@ -4,118 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我们的故事</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" integrity="sha512-wnea99uKIC3TJF7v4eKk4Y+lMz2Mklv18+r4na2Gn1abDRPPOeef95xTzdwGD9e6zXJBteMIhZ1+68QC5byJZw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
+        /* Custom font remains, as Tailwind doesn't manage custom font files directly.
+           You can configure Tailwind to use this font in tailwind.config.js
+           by extending the theme with a custom font family. */
         @font-face {
-            font-family: 'XiaoShiTou';
-            src: url('fonts/XiaoShiTou.eot');
-            src:
-                url('fonts/XiaoShiTou.eot?#font-spider') format('embedded-opentype'),
-                url('fonts/XiaoShiTou.woff2') format('woff2'),
-                url('fonts/XiaoShiTou.woff') format('woff'),
-                url('fonts/XiaoShiTou.ttf') format('truetype'),
-                url('fonts/XiaoShiTou.svg') format('svg');
+            font-family: 'PingFangShangShangQianTi';
+                src: url('./assets/fonts/PingFangShangShangQianTi.eot');
+                src: url('./assets/fonts/PingFangShangShangQianTi.eot?#font-spider') format('embedded-opentype'),
+                url('./assets/fonts/PingFangShangShangQianTi.woff2') format('woff2'),
+                url('./assets/fonts/PingFangShangShangQianTi.woff') format('woff'),
+                url('./assets/fonts/PingFangShangShangQianTi.ttf') format('truetype'),
+                url('./assets/fonts/PingFangShangShangQianTi.svg') format('svg');
             font-weight: normal;
             font-style: normal;
-            font-display: swap; /* 优化加载体验 */
+            font-display: swap; /* Optimize loading experience */
         }
 
-        body {
-            margin: 0;
-            font-family: 'XiaoShiTou', sans-serif;
-            background: linear-gradient(to bottom right, #ffdde1, #ee9ca7);
-            color: #333;
-            text-align: center;
-        }
-        header {
-            padding: 40px 20px 20px;
-            background-color: rgba(255, 255, 255, 0.7);
-            border-bottom: 2px solid #f8cdda;
-        }
-        header h1 {
-            font-size: 4em;
-            margin: 0;
-            color: #d94f70;
-        }
-        header h2 {
-            font-size: 3em;
-            margin: 0;
-            color: #d94f70;
+        body, h1, h2, section h2, #popup h2, p {
+            font-family: 'PingFangShangShangQianTi', sans-serif;
         }
 
-        section {
-            max-width: 800px;
-            margin: 40px auto;
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        section h2 {
-            color: #c94b62;
-            font-size: 2.2em;
-        }
-        .gallery {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        .gallery img {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 10px;
-            border: 3px solid #f8cdda;
-        }
-        footer {
-            padding: 20px;
-            font-size: 0.9em;
-            color: #fff;
-            background-color: rgba(0, 0, 0, 0.2);
-        }
-
-        header h1, header h2, section h2, #popup h2 {
-            font-weight: normal;
-        }
-        p {
-            font-size: 1.4em;
-        }
-
-        /* 弹窗样式 */
+        /* Specific styles not easily replaced by Tailwind or for JS-controlled elements */
         #popup {
             display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-            max-width: 90%;
-        }
-        #popup h2 {
-            margin-top: 0;
-            color: #d94f70;
-            font-size: 2.3em;
-        }
-        #popup button {
-            margin-top: 15px;
-            padding: 10px 20px;
-            background-color: #d94f70;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
         }
     </style>
 </head>
-<body>
-<header>
-    <h1>我们的故事</h1>
-    <h2>
+<body class="m-0 text-center bg-gradient-to-br from-pink-100 to-red-200 text-gray-800">
+<header class="py-10 px-5 md:py-16 md:px-10 bg-white bg-opacity-70 border-b-2 border-pink-200">
+    <h1 class="text-5xl md:text-6xl lg:text-7xl m-0 text-red-500 font-medium">我们的故事</h1>
+    <h2 class="text-4xl md:text-5xl lg:text-6xl m-0 text-red-500 font-medium">
         这是
         <ruby>
             猪猪<rt>yad</rt>
@@ -126,39 +46,30 @@
         </ruby>
         的爱情
     </h2>
-    <p>从相遇到相知，一起走过的每一步</p>
+    <p class="text-xl md:text-3xl font-medium mt-4">从相遇到相知，一起走过的每一步</p>
 </header>
 
-<section>
-    <h2>我们已经在一起</h2>
-    <p><span id="time">0123456789</span></p>
+<section class="max-w-xl mx-auto my-10 md:my-16 bg-white bg-opacity-80 p-6 md:p-8 rounded-xl shadow-lg">
+    <h2 class="text-3xl md:text-4xl text-red-400 font-semibold mb-4">我们已经在一起</h2>
+    <p class="text-2xl md:text-3xl font-normal"><span id="time">0123456789</span></p>
 </section>
 
-<!--
-<section>
-    <h2>我们的回忆</h2>
-    <div class="gallery">
-        <img src="https://placekitten.com/200/200" alt="回忆1">
-        <img src="https://placekitten.com/201/200" alt="回忆2">
-        <img src="https://placekitten.com/200/201" alt="回忆3">
-        <img src="https://placekitten.com/202/200" alt="回忆4">
-    </div>
-</section>
--->
-
-<section>
-    <h2>猪猪语录</h2>
-    <p>
+<section class="max-w-xl mx-auto my-10 md:my-16 bg-white bg-opacity-80 p-6 md:p-8 rounded-xl shadow-lg">
+    <h2 class="text-3xl md:text-4xl text-red-400 font-semibold mb-4">猪猪语录</h2>
+    <p class="text-2xl md:text-3xl font-normal italic mb-2">
         “再走走，一起一直走下去！”
     </p>
-    <p>
+    <p class="text-2xl md:text-3xl font-normal italic mb-2">
         “不唯上，不唯书，只唯猪”
+    </p>
+    <p class="text-2xl md:text-3xl font-normal italic">
+        “永远童真！”
     </p>
 </section>
 
-<section>
-    <h2>写给彼此的一封信</h2>
-    <p>
+<section class="max-w-xl mx-auto my-10 md:my-16 bg-white bg-opacity-80 p-6 md:p-8 rounded-xl shadow-lg">
+    <h2 class="text-3xl md:text-4xl text-red-400 font-semibold mb-4">写给彼此的一封信</h2>
+    <p class="text-2xl md:text-3xl font-normal leading-relaxed">
         亲爱的猪猪，感谢上苍，能在茫茫人海中遇见你。
         <br/>
         让我知道，原来世界上真的有如此美好的人存在。
@@ -169,14 +80,17 @@
     </p>
 </section>
 
-<footer>
+<footer class="p-5 text-sm text-white bg-black bg-opacity-20 mt-10">
     <p>© 2025 我们的爱情故事 | 永远爱你 ❤️</p>
 </footer>
 
-<div id="popup">
-    <h2>520快乐❤️</h2>
-    <p>亲爱的猪猪，节日快乐！</p>
-    <button onclick="document.getElementById('popup').style.display='none'">关闭</button>
+<div id="popup" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-8 rounded-xl shadow-2xl z-50 max-w-sm text-center">
+    <h2 class="mt-0 text-4xl text-red-500 mb-4">520快乐❤️</h2>
+    <p class="text-xl mb-4">亲爱的猪猪，节日快乐！</p>
+    <button onclick="document.getElementById('popup').style.display='none'"
+            class="mt-4 py-2 px-6 bg-red-500 text-white border-none rounded-lg cursor-pointer hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
+        关闭
+    </button>
 </div>
 
 <script>
@@ -186,17 +100,19 @@
     function updateCountdown() {
         const now = new Date();
         const diff = now - startDate;
+
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
         const minutes = Math.floor((diff / (1000 * 60)) % 60);
         const seconds = Math.floor((diff / 1000) % 60);
+
         timeEl.textContent = `${days} 天 ${hours} 小时 ${minutes} 分 ${seconds} 秒`;
     }
 
     function isSpecialDate() {
         const now = new Date();
         const mmdd = (now.getMonth() + 1).toString().padStart(2, '0') + now.getDate().toString().padStart(2, '0');
-        return mmdd === '0520' // 520 或 七夕（农历七夕约为公历8月中下旬，这里简化为 0817）
+        return mmdd === '0520'; // Checks for May 20th
     }
 
     if (isSpecialDate()) {
@@ -205,7 +121,9 @@
         }, 1000);
     }
 
+    // Update countdown every second
     setInterval(updateCountdown, 1000);
+    // Initial call to display immediately
     updateCountdown();
 </script>
 </body>
