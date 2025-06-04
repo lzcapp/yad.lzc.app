@@ -22,6 +22,10 @@
             font-display: swap;
         }
 
+        html {
+            height: 100vh;
+        }
+
         /* Custom CSS for Leaflet map to ensure it fills the circular container */
         #map {
             height: 100%; /* Make sure the map takes full height of its container */
@@ -71,7 +75,7 @@
             doubleClickZoom: true, // Enable double click zoom
             boxZoom: false, // Disable box zoom
             keyboard: false, // Disable keyboard navigation
-            zoomControl: true, // Keep zoom control buttons visible
+            zoomControl: false, // Keep zoom control buttons visible
             minZoom: 15, // Set a minimum zoom level if desired
             maxZoom: 18 // Set a maximum zoom level if desired
         }).setView(centerCoords, 16); // Zoom level 13 is a good balance for city view
