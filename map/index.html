@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Where It All Began</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"
+          xintegrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <style>
+        @font-face {
+            font-family: 'PingFangShangShangQianTi';
+            src: url('./assets/fonts/PingFangShangShangQianTi.eot');
+            src: url('./assets/fonts/PingFangShangShangQianTi.eot?#font-spider') format('embedded-opentype'),
+            url('./assets/fonts/PingFangShangShangQianTi.woff2') format('woff2'),
+            url('./assets/fonts/PingFangShangShangQianTi.woff') format('woff'),
+            url('./assets/fonts/PingFangShangShangQianTi.ttf') format('truetype'),
+            url('./assets/fonts/PingFangShangShangQianTi.svg') format('svg');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* Custom CSS for Leaflet map to ensure it fills the circular container */
+        #map {
+            height: 100%; /* Make sure the map takes full height of its container */
+            width: 100%; /* Make sure the map takes full width of its container */
+            z-index: 0; /* Ensure map is below any overlays if needed */
+        }
+
+        /* Custom font for a more elegant look, similar to the image */
+        body {
+            font-family: "PingFangShangShangQianTi", "Inter", sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen flex items-center justify-center p-4">
+<div class="flex flex-col items-center justify-center bg-white p-8 rounded-xl shadow-2xl max-w-md w-full">
+    <div class="relative w-80 h-80 sm:w-96 sm:h-96 rounded-full overflow-hidden border-1 border-indigo-200 shadow-lg">
+        <div id="map" class="bg-gray-100"></div>
+    </div>
+
+    <div class="info text-center mt-8 space-y-2">
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-indigo-800 tracking-tight leading-tight">一切开始的地方</h1>
+        <p class="coordinates text-2xl sm:text-3xl text-gray-700 font-medium">23°13′27.55″N&ensp;113°18′31.82″E</p>
+        <p class="location text-2xl sm:text-3xl text-gray-700 font-medium">白云小筑</p>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"
+        xintegrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- 互联网地图插件 -->
+<script type="text/javascript" src="./assets/js/leaflet.ChineseTmsProviders.js"></script>
+<!-- 互联网地图纠偏插件 -->
+<!--<script type="text/javascript" src='./assets/js/leaflet.mapCorrection.min.js'></script>-->
+<script>
+    // Wait for the window to load before initializing the map
+    window.onload = function () {
+        // Define the coordinates for Toronto, ON
+        const torontoCoords = [23.22432, 113.30884]; // Latitude, Longitude
+        const centerCoords = [23.22432, 113.30884];
+
+        // Initialize the Leaflet map
+        // 'map' is the ID of the div where the map will be rendered
+        // setView sets the initial geographical center and zoom level of the map
+        const map = L.map('map', {
+            dragging: false, // Disable dragging
+            scrollWheelZoom: true, // Enable scroll wheel zoom
+            doubleClickZoom: true, // Enable double click zoom
+            boxZoom: false, // Disable box zoom
+            keyboard: false, // Disable keyboard navigation
+            zoomControl: true, // Keep zoom control buttons visible
+            minZoom: 15, // Set a minimum zoom level if desired
+            maxZoom: 18 // Set a maximum zoom level if desired
+        }).setView(centerCoords, 16); // Zoom level 13 is a good balance for city view
+
+        // Add a tile layer to the map
+        // This uses OpenStreetMap tiles, which provide a clean and basic map style
+        L.tileLayer.chinaProvider('GaoDe.Normal.Map', {maxZoom: 18, minZoom: 15}).addTo(map);
+
+        // Listen for the 'zoomend' event and re-center the map to torontoCoords
+        map.on('zoomend', function () {
+            map.setView(centerCoords, map.getZoom());
+        });
+
+        // Create a Leaflet DivIcon with the custom SVG
+        // DivIcon allows for custom HTML content as a marker icon
+        const customPngIcon = L.icon({
+            iconUrl: './assets/images/heart.png', // Replace with the actual path to your PNG file
+            iconSize: [32, 32], // Size of the icon in pixels (width, height)
+            iconAnchor: [16, 32], // Point of the icon which will correspond to marker's location (e.g., bottom-center)
+            popupAnchor: [0, -32] // Point from which the popup should open, relative to the iconAnchor
+        });
+
+        // Add the custom heart marker to the map at the specified coordinates
+        L.marker(torontoCoords, {icon: customPngIcon}).addTo(map)
+            .bindPopup('<b>一切开始的地方！</b><br>白云小筑') // Add a popup on click
+        //.openPopup(); // Open the popup by default
+    };
+</script>
+</body>
+</html>

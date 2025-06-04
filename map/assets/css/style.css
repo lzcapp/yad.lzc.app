@@ -1,0 +1,85 @@
+/* CSS Variables */
+:root {
+    --body-bg-color: black;
+    --map-height: 98dvh; /* Using dvh for better mobile viewport handling */
+    --info-padding: 6px 8px;
+    --info-font: 14px/16px Arial, Helvetica, sans-serif;
+    --info-bg-color: rgba(255, 255, 255, 0.85); /* Slightly increased opacity */
+    --info-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
+    --info-border-radius: 5px;
+    --info-header-color: #555; /* Darker for better contrast */
+    --legend-line-height: 18px;
+    --legend-text-color: #555;
+    --loading-indicator-color: #333;
+    --error-message-color: red;
+}
+
+html {
+    background-color: var(--body-bg-color);
+    font-family: var(--info-font), sans-serif; /* Apply a base font */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#map {
+    height: var(--map-height);
+    width: 100%; /* Ensure map takes full width */
+    position: relative; /* For positioning loading indicator */
+}
+
+.info {
+    padding: var(--info-padding);
+    font: var(--info-font);
+    background: var(--info-bg-color);
+    box-shadow: var(--info-shadow);
+    border-radius: var(--info-border-radius);
+}
+
+.info h4 {
+    margin: 0 0 5px;
+    color: var(--info-header-color);
+}
+
+/* Legend styles (if you plan to add a legend later) */
+/*
+.legend {
+    line-height: var(--legend-line-height);
+    color: var(--legend-text-color);
+    background: var(--info-bg-color);
+    padding: var(--info-padding);
+    border-radius: var(--info-border-radius);
+    box-shadow: var(--info-shadow);
+}
+
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+*/
+
+#loading-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px 25px;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: var(--loading-indicator-color);
+    border-radius: var(--info-border-radius);
+    box-shadow: var(--info-shadow);
+    z-index: 10000; /* Ensure it's on top */
+    font-size: 16px;
+}
+
+.map-error-message {
+    color: var(--error-message-color);
+    text-align: center;
+    padding-top: 20px;
+    font-weight: bold;
+}
