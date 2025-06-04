@@ -11,12 +11,12 @@
     <style>
         @font-face {
             font-family: 'PingFangShangShangQianTi';
-            src: url('../assets/fonts/PingFangShangShangQianTi.eot');
-            src: url('../assets/fonts/PingFangShangShangQianTi.eot?#font-spider') format('embedded-opentype'),
-            url('../assets/fonts/PingFangShangShangQianTi.woff2') format('woff2'),
-            url('../assets/fonts/PingFangShangShangQianTi.woff') format('woff'),
-            url('../assets/fonts/PingFangShangShangQianTi.ttf') format('truetype'),
-            url('../assets/fonts/PingFangShangShangQianTi.svg') format('svg');
+            src: url('./assets/fonts/PingFangShangShangQianTi.eot');
+            src: url('./assets/fonts/PingFangShangShangQianTi.eot?#font-spider') format('embedded-opentype'),
+            url('./assets/fonts/PingFangShangShangQianTi.woff2') format('woff2'),
+            url('./assets/fonts/PingFangShangShangQianTi.woff') format('woff'),
+            url('./assets/fonts/PingFangShangShangQianTi.ttf') format('truetype'),
+            url('./assets/fonts/PingFangShangShangQianTi.svg') format('svg');
             font-weight: normal;
             font-style: normal;
             font-display: swap;
@@ -96,7 +96,7 @@
 
         // Add the custom heart marker to the map at the specified coordinates
         L.marker(torontoCoords, {icon: customPngIcon}).addTo(map)
-            .bindPopup('<b>一切开始的地方！</b><br>白云小筑') // Add a popup on click
+            .bindPopup('<b>一切开始的地方！</b><br>@白云小筑') // Add a popup on click
         //.openPopup(); // Open the popup by default
     };
 </script>
