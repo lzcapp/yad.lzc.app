@@ -22,7 +22,7 @@
             font-display: swap;
         }
 
-        html {
+        html, body {
             height: 100vh;
         }
 
@@ -93,15 +93,12 @@
         // DivIcon allows for custom HTML content as a marker icon
         const customPngIcon = L.icon({
             iconUrl: './assets/images/heart.png', // Replace with the actual path to your PNG file
-            iconSize: [32, 32], // Size of the icon in pixels (width, height)
-            iconAnchor: [16, 32], // Point of the icon which will correspond to marker's location (e.g., bottom-center)
-            popupAnchor: [0, -32] // Point from which the popup should open, relative to the iconAnchor
+            iconSize: [38, 38], // Size of the icon in pixels (width, height)
+            iconAnchor: [19, 38] // Point of the icon which will correspond to marker's location (e.g., bottom-center)
         });
 
         // Add the custom heart marker to the map at the specified coordinates
         L.marker(torontoCoords, {icon: customPngIcon}).addTo(map)
-            .bindPopup('<b>一切开始的地方！</b><br>@白云小筑') // Add a popup on click
-        //.openPopup(); // Open the popup by default
     };
 </script>
 </body>
