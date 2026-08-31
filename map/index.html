@@ -1,105 +1,150 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#eff6ff">
+    <meta name="description" content="一切开始的地方——白云小筑。">
+    <meta property="og:title" content="一切开始的地方">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yad.lzc.app/map/">
+    <meta property="og:description" content="一切开始的地方——白云小筑。">
     <title>一切开始的地方</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" integrity="sha512-wnea99uKIC3TJF7v4eKk4Y+lMz2Mklv18+r4na2Gn1abDRPPOeef95xTzdwGD9e6zXJBteMIhZ1+68QC5byJZw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"
-          xintegrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw=="
+          integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <style>
         @font-face {
             font-family: 'PingFangShangShangQianTi';
-            src: url('./assets/fonts/PingFangShangShangQianTi.eot');
-            src: url('./assets/fonts/PingFangShangShangQianTi.eot?#font-spider') format('embedded-opentype'),
-            url('./assets/fonts/PingFangShangShangQianTi.woff2') format('woff2'),
-            url('./assets/fonts/PingFangShangShangQianTi.woff') format('woff'),
-            url('./assets/fonts/PingFangShangShangQianTi.ttf') format('truetype'),
-            url('./assets/fonts/PingFangShangShangQianTi.svg') format('svg');
+            src: url('./assets/fonts/PingFangShangShangQianTi.woff2') format('woff2'),
+                 url('./assets/fonts/PingFangShangShangQianTi.woff') format('woff');
             font-weight: normal;
             font-style: normal;
             font-display: swap;
         }
 
-        html, body {
-            height: 100vh;
+        :root {
+            --font-cn: 'PingFangShangShangQianTi', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
         }
 
-        /* Custom CSS for Leaflet map to ensure it fills the circular container */
-        #map {
-            height: 100%; /* Make sure the map takes full height of its container */
-            width: 100%; /* Make sure the map takes full width of its container */
-            z-index: 0; /* Ensure map is below any overlays if needed */
-        }
+        * { box-sizing: border-box; }
 
-        /* Custom font for a more elegant look, similar to the image */
+        html, body { height: 100%; }
+
         body {
-            font-family: "PingFangShangShangQianTi", "Inter", sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            font-family: var(--font-cn);
+            background: linear-gradient(135deg, #eff6ff, #e0e7ff);
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            max-width: 28rem;
+            width: 100%;
+        }
+
+        .map-circle {
+            position: relative;
+            width: 20rem;
+            height: 20rem;
+            border-radius: 9999px;
+            overflow: hidden;
+            border: 1px solid #c7d2fe;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+
+        .info { text-align: center; margin-top: 2rem; }
+
+        .info h1 {
+            margin: 0 0 0.5rem;
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: #3730a3;
+            letter-spacing: -0.025em;
+            line-height: 1.25;
+        }
+
+        .info p {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .info p + p { margin-top: 0.5rem; }
+
+        @media (min-width: 640px) {
+            .map-circle { width: 24rem; height: 24rem; }
+            .info h1 { font-size: 3rem; }
+            .info p { font-size: 1.875rem; }
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen flex items-center justify-center p-4">
-<div class="flex flex-col items-center justify-center bg-white p-8 rounded-xl shadow-2xl max-w-md w-full">
-    <div class="relative w-80 h-80 sm:w-96 sm:h-96 rounded-full overflow-hidden border-1 border-indigo-200 shadow-lg">
-        <div id="map" class="bg-gray-100"></div>
+<body>
+<div class="card">
+    <div class="map-circle">
+        <div id="map"></div>
     </div>
 
-    <div class="info text-center mt-8 space-y-2">
-        <h1 class="text-4xl sm:text-5xl font-extrabold text-indigo-800 tracking-tight leading-tight">一切开始的地方</h1>
-        <p class="coordinates text-2xl sm:text-3xl text-gray-700 font-medium">23°13′27.55″N&ensp;113°18′31.82″E</p>
-        <p class="location text-2xl sm:text-3xl text-gray-700 font-medium">白云小筑</p>
+    <div class="info">
+        <h1>一切开始的地方</h1>
+        <p class="coordinates">23°13′27.55″N&ensp;113°18′31.82″E</p>
+        <p class="location">白云小筑</p>
     </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"
-        xintegrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g=="
+        integrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- 互联网地图插件 -->
 <script type="text/javascript" src="./assets/js/leaflet.ChineseTmsProviders.js"></script>
-<!-- 互联网地图纠偏插件 -->
-<!--<script type="text/javascript" src='./assets/js/leaflet.mapCorrection.min.js'></script>-->
 <script>
-    // Wait for the window to load before initializing the map
-    window.onload = function () {
-        // Define the coordinates for Toronto, ON
-        const torontoCoords = [23.22432, 113.30884]; // Latitude, Longitude
-        const centerCoords = [23.22432, 113.30884];
+    // 标记点坐标（高德瓦片为 GCJ-02 坐标系）
+    const spotCoords = [23.22432, 113.30884];
 
-        // Initialize the Leaflet map
-        // 'map' is the ID of the div where the map will be rendered
-        // setView sets the initial geographical center and zoom level of the map
-        const map = L.map('map', {
-            dragging: false, // Disable dragging
-            scrollWheelZoom: true, // Enable scroll wheel zoom
-            doubleClickZoom: true, // Enable double click zoom
-            boxZoom: false, // Disable box zoom
-            keyboard: false, // Disable keyboard navigation
-            zoomControl: false, // Keep zoom control buttons visible
-            minZoom: 15, // Set a minimum zoom level if desired
-            maxZoom: 18 // Set a maximum zoom level if desired
-        }).setView(centerCoords, 16); // Zoom level 13 is a good balance for city view
+    const map = L.map('map', {
+        dragging: false,
+        scrollWheelZoom: true,
+        doubleClickZoom: true,
+        boxZoom: false,
+        keyboard: false,
+        zoomControl: false,
+        minZoom: 15,
+        maxZoom: 18
+    }).setView(spotCoords, 16);
 
-        // Add a tile layer to the map
-        // This uses OpenStreetMap tiles, which provide a clean and basic map style
-        L.tileLayer.chinaProvider('GaoDe.Normal.Map', {maxZoom: 18, minZoom: 15}).addTo(map);
+    L.tileLayer.chinaProvider('GaoDe.Normal.Map', {maxZoom: 18, minZoom: 15}).addTo(map);
 
-        // Listen for the 'zoomend' event and re-center the map to torontoCoords
-        map.on('zoomend', function () {
-            map.setView(centerCoords, map.getZoom());
-        });
+    // 缩放后始终回到标记点
+    map.on('zoomend', function () {
+        map.setView(spotCoords, map.getZoom());
+    });
 
-        // Create a Leaflet DivIcon with the custom SVG
-        // DivIcon allows for custom HTML content as a marker icon
-        const customPngIcon = L.icon({
-            iconUrl: './assets/images/heart.png', // Replace with the actual path to your PNG file
-            iconSize: [38, 38], // Size of the icon in pixels (width, height)
-            iconAnchor: [19, 38] // Point of the icon which will correspond to marker's location (e.g., bottom-center)
-        });
+    const heartIcon = L.icon({
+        iconUrl: './assets/images/heart.png',
+        iconSize: [38, 38],
+        iconAnchor: [19, 38]
+    });
 
-        // Add the custom heart marker to the map at the specified coordinates
-        L.marker(torontoCoords, {icon: customPngIcon}).addTo(map)
-    };
+    L.marker(spotCoords, {icon: heartIcon}).addTo(map);
 </script>
 </body>
 </html>
