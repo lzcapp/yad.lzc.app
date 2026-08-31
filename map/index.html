@@ -3,34 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
     <meta name="theme-color" content="#eff6ff">
-    <meta name="description" content="一切开始的地方——白云小筑。">
-    <meta property="og:title" content="一切开始的地方">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yad.lzc.app/map/">
-    <meta property="og:description" content="一切开始的地方——白云小筑。">
     <title>一切开始的地方</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"
-          integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <style>
-        @font-face {
-            font-family: 'ZCOOL KuaiLe';
-            src: url('../assets/fonts/ZCOOLKuaiLe-Regular.woff2') format('woff2'),
-                 url('../assets/fonts/ZCOOLKuaiLe-Regular.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
-
-        :root {
-            --font-cn: 'ZCOOL KuaiLe', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
-        }
-
         * { box-sizing: border-box; }
-
-        html, body { height: 100%; }
 
         body {
             margin: 0;
@@ -39,112 +17,44 @@
             align-items: center;
             justify-content: center;
             padding: 1rem;
-            font-family: var(--font-cn);
+            font-family: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
             background: linear-gradient(135deg, #eff6ff, #e0e7ff);
         }
 
         .card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            text-align: center;
             background: #fff;
-            padding: 2rem;
+            padding: 2.5rem 3rem;
             border-radius: 0.75rem;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            max-width: 28rem;
-            width: 100%;
+            max-width: 24rem;
         }
 
-        .map-circle {
-            position: relative;
-            width: 20rem;
-            height: 20rem;
-            border-radius: 9999px;
-            overflow: hidden;
-            border: 1px solid #c7d2fe;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        .heart {
+            font-size: 2.5rem;
+            color: #e11d48;
+            line-height: 1;
         }
 
-        #map {
-            height: 100%;
-            width: 100%;
-        }
-
-        .info { text-align: center; margin-top: 2rem; }
-
-        .info h1 {
-            margin: 0 0 0.5rem;
-            font-size: 2.25rem;
-            font-weight: normal;
-            color: #3730a3;
-            letter-spacing: -0.025em;
-            line-height: 1.25;
-        }
-
-        .info p {
-            margin: 0;
+        h1 {
+            margin: 0.75rem 0 0.5rem;
             font-size: 1.5rem;
             font-weight: normal;
-            color: #374151;
+            color: #3730a3;
         }
 
-        .info p + p { margin-top: 0.5rem; }
-
-        @media (min-width: 640px) {
-            .map-circle { width: 24rem; height: 24rem; }
-            .info h1 { font-size: 3rem; }
-            .info p { font-size: 1.875rem; }
+        p {
+            margin: 0.25rem 0;
+            font-size: 1rem;
+            color: #6b7280;
         }
     </style>
 </head>
 <body>
 <div class="card">
-    <div class="map-circle">
-        <div id="map"></div>
-    </div>
-
-    <div class="info">
-        <h1>一切开始的地方</h1>
-        <p class="coordinates">23°13′27.55″N&ensp;113°18′31.82″E</p>
-        <p class="location">白云小筑</p>
-    </div>
+    <div class="heart">&#9829;</div>
+    <h1>一切开始的地方</h1>
+    <p>此页面暂时关闭，敬请期待。</p>
 </div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"
-        integrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!-- 互联网地图插件 -->
-<script type="text/javascript" src="./assets/js/leaflet.ChineseTmsProviders.js"></script>
-<script>
-    // 标记点坐标（高德瓦片为 GCJ-02 坐标系）
-    const spotCoords = [23.22432, 113.30884];
-
-    const map = L.map('map', {
-        dragging: false,
-        scrollWheelZoom: true,
-        doubleClickZoom: true,
-        boxZoom: false,
-        keyboard: false,
-        zoomControl: false,
-        minZoom: 15,
-        maxZoom: 18
-    }).setView(spotCoords, 16);
-
-    L.tileLayer.chinaProvider('GaoDe.Normal.Map', {maxZoom: 18, minZoom: 15}).addTo(map);
-
-    // 缩放后始终回到标记点
-    map.on('zoomend', function () {
-        map.setView(spotCoords, map.getZoom());
-    });
-
-    const heartIcon = L.icon({
-        iconUrl: './assets/images/heart.png',
-        iconSize: [38, 38],
-        iconAnchor: [19, 38]
-    });
-
-    L.marker(spotCoords, {icon: heartIcon}).addTo(map);
-</script>
 </body>
 </html>
